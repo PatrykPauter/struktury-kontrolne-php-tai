@@ -1,0 +1,333 @@
+// STRUKTURY KONTOROLNE
+podstawowe wyrażenie:
+<?php
+if (wyrażenie) {
+    // kod do wykonania jeżeli wyrażenie jest prawdziwe
+}
+<?php
+$wallet = 15.50;
+$purchaseCost = 4.99;
+if ($wallet >= $purchaseCost) {
+    echo 'You can purchase!';
+}
+// result: You can purchase!
+
+// &&, and i - wszystkie muszą być prawdziwe
+<?php
+$name = 'Jan';
+$age = 25;
+if ($name === 'Jan' && $age === 30) {
+    echo 'OK';
+}
+// no result
+
+// ||, or lub - przynajmniej jedno musi być prawdziwe
+<?php
+$name = 'Jan';
+$age = 25;
+if ($name === 'Jan' || $age === 30) {
+    echo 'OK';
+}
+// result: OK
+
+// xor - tylko jedno musi być prawdziwe
+<?php
+$name = 'Jan';
+$age = 25;
+if ($name === 'Jan' xor $age === 30) {
+    echo 'OK';
+}
+// result: OK
+
+//można łączyc wiele wyrażeń i mieszać różne operatory a także grupować je za pomocą nawiasów
+//Użycie || spowoduje, że pasować musi przynajmniej jeden taki zestaw danych, aby cały warunek został uznany za prawdziwy.
+//Mamy też operator zaprzeczenia !, który sprawdzi, czy wyrażenie nie będzie prawdziwe.
+<?php
+$status = false;
+if (!$status) { //!
+    echo 'not true';
+}
+// result: not true
+<?php
+$wallet = 15.50;
+$purchaseCost = 4.99;
+if ($wallet >= $purchaseCost) {
+    echo 'You can purchase!';
+}
+if ($wallet < $purchaseCost) {
+    echo 'You can\'t purchase!';
+}
+// result: You can purchase!
+?php
+if (wyrażenie) {
+    // kod do wykonania jeżeli wyrażenie jest prawdziwe
+} else {
+    // kod do wykonania jeżeli wyrażenie nie jest prawdziwe
+}
+Poprawmy od razu powyższy przykład składający się z dwóch ifów na użycie if i else.
+
+<?php
+$wallet = 15.50;
+$purchaseCost = 4.99;
+if ($wallet >= $purchaseCost) {
+    echo 'You can purchase!';
+} else {
+    echo 'You can\'t purchase!';
+}
+// result: You can purchase!
+Istnieje jeszcze opcja połączenia else i if. Dzięki temu możemy od razu dodać kolejny warunek i wykonać go tylko wtedy, gdy wcześniejszy się nie spełni.
+<?php
+if (wyrażenie1) {
+    // kod do wykonania jeżeli wyrażenie jest prawdziwe
+} elseif (wyrażenie2) {
+    // kod do wykonania jeżeli wyrażenie1 nie jest prawdziwe, a wyrażenie 2 jest prawdziwe
+} else {
+    // kod do wykonania jeśli żadne wyrażenie nie jest prawdziwe
+}
+Możemy skrócić zapis przy użyciu konstrukcji z ? i :.
+
+<?php
+wyrażenie ? co jeśli prawda : co jeśli fałsz
+
+Nie służy on jednak do wykonywania całych instrukcji, a tylko prostych operacji - na przykład przypisań czy wyświetleń.
+
+<?php
+$hour = 18;
+if ($hour >= 22) {
+    echo 'night';
+} else {
+    echo 'day';
+}
+// result: day
+
+<?php
+$hour = 18;
+echo $hour >= 22 ? 'night' : 'day';
+// result: day
+
+Efekt działania obydwu przykładów jest taki sam.
+Mamy też operator ??, który umożliwia szybkie sprawdzenie, czy dana wartość istnieje i nie jest pusta (null). W takim przypadku zwracana jest wartość po lewej od operatora, a w przeciwnym ta po prawej. Zobaczmy:
+
+<?php
+echo $number ?? 'wrong number'; // result: wrong number
+
+$number = null;
+echo $number ?? 'wrong number'; // result: wrong number
+
+$number = 5;
+echo $number ?? 'wrong number'; // result: 5
+
+// SWITCH I MATCH // SWITCH I MATCH // SWITCH I MATCH // SWITCH I MATCH // SWITCH I MATCH // SWITCH I MATCH // SWITCH I MATCH // SWITCH I MATCH // SWITCH I MATCH // SWITCH I MATCH // SWITCH I MATCH
+Nazywany jest też instrukcją wyboru. Można porównać go do użycia kilku ifów w celu sprawdzenia wartości tej samej zmiennej. Jak wygląda switch?
+
+<?php
+switch (wartość) {
+    case 0:
+        // wykonaj jeśli wartość będzie wynosiła 0
+        break;
+    case 1:
+        // wykonaj jeśli wartość będzie wynosiła 1
+        break;
+    case 2:
+        // wykonaj jeśli wartość będzie wynosiła 2
+        break;
+}
+przykład zapisu tego samego kodu przy użyciu if oraz switch.
+
+<?php
+$name = 'Marek';
+if ($name === 'Jan') {
+    echo 'Your name is Jan';
+} elseif ($name === 'Marek') {
+    echo 'Your name is Marek';
+} elseif ($name === 'Eryk') {
+    echo 'Your name is Eryk';
+}
+// result: Your name is Marek
+<?php
+$name = 'Marek';
+switch ($name) {
+    case 'Jan':
+        echo 'Your name is Jan';
+        break;
+    case 'Marek':
+        echo 'Your name is Marek';
+        break;
+    case 'Eryk':
+        echo 'Your name is Eryk';
+        break;
+}
+// result: Your name is Marek
+Mamy również opcję ustalenia wartości domyślnej, która wykona się, jeśli wcześniej żadna nie zostanie dopasowana. Definiujemy ją poprzez default.
+
+<?php
+$name = 'Katarzyna';
+switch ($name) {
+    case 'Anna':
+    case 'Maria':
+        echo 'You are a woman';
+        break;
+    case 'Jan':
+    case 'Marek':
+    case 'Eryk':
+        echo 'You are a man';
+        break;
+    default:
+        echo 'I don\'t know you';
+        break;
+}
+// result: I don't know you
+Pętle w programowaniu służą do wielokrotnego powtarzania operacji. Istnieje kilka rodzajów pętli - w tej lekcji powiemy o pętli for, a pozostałe poznamy w kolejnych.
+
+Poznajmy najpierw podstawowy zapis pętli for:
+
+<?php
+for (inicjalizacja; wyrażenie; po iteracji) {
+    // instrukcje do wykonania za każdym przejściem pętli
+}
+
+    inicjalizacja to instrukcja do wykonania przed rozpoczęciem wykonywania pętli
+    wyrażenie - kolejne przejście pętli zostanie wykonane tylko, jeśli będzie ono prawdziwe (true)
+    po iteracji będzie wykonywane właśnie po każdej iteracji (czyli po każdym przejściu pętli)
+    w klamrach zapisujemy instrukcje do wykonania w każdej iteracji pętli
+
+Pora na konkretny przykład. Wypiszmy liczby od 1 do 10 przy użyciu for.
+
+<?php
+for ($number = 1; $number <= 10; $number++) {
+    echo $number . ' ';
+}
+// result: 1 2 3 4 5 6 7 8 9 10
+Dla pewności wytłumaczę jeszcze raz, krok po kroku.
+
+    $number = 1 inicjuje zmienną z wartością 1
+    $number <= 10 sprawdza, czy wartość zmiennej $number jest mniejsza lub równa 10 i tylko jeżeli tak wykonuje iteracje pętli
+    $number++ po każdym przejściu pętli zwiększa wartość zmiennej o 1
+
+    //INFINITE LOOP
+    <?php
+for (;;) {
+
+}
+//Pętla while
+Kolejna pętla to while. Podobnie jak for, służy do wielokrotnego wykonywania operacji, ale znacznie różni się budową. Sprawdzamy w niej tylko wyrażenie i jeśli jest ono prawdziwe, wykonuje się iteracja. W przeciwnym wypadku pętla się kończy.
+
+<?php
+while (wyrażenie) {
+    // instrukcje do wykonania w każdej iteracji pętli
+}
+
+Zmodyfikujmy pierwszy przykład z poprzedniej lekcji, wykorzystujący pętlę for, na użycie pętli while.
+
+<?php
+$number = 1;
+while ($number <= 10) {
+    echo $number . ' ';
+    $number++;
+}
+// result: 1 2 3 4 5 6 7 8 9 10
+
+Dla pełnego zrozumienia pokażę jeszcze jeden przykład:
+
+<?php
+$number = 80;
+while ($number !== 70) {
+    echo $number . ' ';
+    $number -= 2;
+}
+// result: 80 78 76 74 72
+
+//Pętla do-while
+Jest ona bardzo podobna do pętli while. Różnica jest jedna - w do-while wyrażenie sprawdzane jest dopiero po wykonaniu iteracji. W praktyce oznacza to tyle, że iteracja wykona się zawsze przynajmniej raz, nawet gdyby wyrażenie nie spełniło się ani razu.
+
+Możliwość użycia niniejszej konstrukcji zależy więc od sytuacji. Z moich obserwacji wynika, że dość rzadko się ją spotyka.
+
+Standardowo zobaczmy najpierw ogólny zapis:
+
+<?php
+do {
+    // instrukcje do wykonania w każdej iteracji pętli
+}
+while (wyrażenie);
+
+Ważny jest średnik na końcu, w poprzednich strukturach go nie było.
+
+Zapiszmy przykład z poprzednich lekcji przy użyciu pętli do-while:
+
+<?php
+$number = 1;
+do {
+    echo $number . ' ';
+    $number++;
+} while ($number <= 10);
+// result: 1 2 3 4 5 6 7 8 9 10
+
+Przypomnę, że pierwszy przebieg pętli wykona się, nawet jeśli wyrażenie nigdy nie będzie prawdziwe.
+
+<?php
+$number = 50;
+do {
+    echo $number . ' ';
+    $number += 10;
+} while ($number > 100);
+// result: 50
+//pętla for each
+Podstawowy zapis tej pętli wygląda następująco:
+
+<?php
+foreach ($tablica as $element) {
+    // instrukcje do wykonania na każdym elemencie tablicy
+}
+Bez użycia pętli musielibyśmy ręcznie wypisać wyświetlenie wszystkich elementów. A gdyby zdarzyło się, że tablica nie ma dokładnie określonej liczby elementów, to już w ogóle byłby problem.
+
+<?php
+$people = ['Jan', 'Piotr', 'Adrian', 'Marek', 'Adam'];
+echo $people[0];
+echo $people[1];
+// ...
+echo $people[4];
+
+Istnieje także możliwość odczytania indeksu/klucza dla każdego elementu poprzez dodanie =>.
+
+<?php
+$person = [
+    'name' => 'Jan',
+    'age' => 26,
+    'address' => 'Kwiatowa 1',
+    'email' => 'jan@example.com'
+];
+foreach ($person as $data => $value) {
+    echo $data . ': ' . $value . ', ';
+}
+// result: name: Jan, age: 26, address: Kwiatowa 1, email: jan@example.com,
+//STEROWANIE PĘTLAMI
+Może się zdarzyć tak, że pętla spełni już swoje zadanie i będziemy chcieli przerwać jej wykonywanie. Służy do tego break.
+
+<?php
+$number = 1;
+while ($number <= 50) {
+    echo $number . ' ';
+    if ($number === 15) {
+        break;
+    }
+    $number++;
+}
+// result: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+Jeżeli zechcemy przerwać bieżącą iterację, to również możemy to zrobić, używając continue. Warto raz jeszcze podkreślić, że nie omija to żadnej iteracji, ani nie kończy całej pętli, a tylko przerywa obecne przejście (kod wpisany za continue nie wykona się dla tej iteracji). Dobrze obrazują to poniższe przykłady:
+
+<?php
+for ($count = 0; $count <= 10; $count++) {
+    echo $count;
+    echo ', ';
+}
+// result: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+
+<?php
+for ($count = 0; $count <= 10; $count++) {
+    echo $count;
+    continue;
+    echo ', ';
+}
+// result: 012345678910
+
+Obydwu zapisów możemy używać we wszystkich omówionych pętlach.
